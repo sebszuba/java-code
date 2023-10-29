@@ -1,0 +1,64 @@
+
+package l12d;
+
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+public class L12d {
+
+    public static void main(String[] args) {
+        File inFile = new File("palin.txt");
+        Scanner fileInput = null;
+        
+        try {
+             fileInput = new Scanner(inFile);
+        }
+        
+        catch (FileNotFoundException e)
+        {
+            System.out.println(e);
+        }
+        
+        while (fileInput.hasNext()) {
+        Scanner scnr = new Scanner(System.in);
+        
+        String input = fileInput.nextLine();
+        
+    
+    
+    //output the original phrase
+    System.out.print("\"" + input + "\"");
+    
+    //make lower case
+    input = input.toLowerCase();
+    //eliminate punctuation
+    String word1 = "";
+    for (int i = 0; i < input.length(); i ++) {
+       char chari = input.charAt(i);
+       if (chari != '"' && chari != '&' && chari != '?' && chari != '\'' && chari != '/' && chari != '!' && chari != ',' && chari != ' ' && chari != '*') {
+          word1 = word1 + input.charAt(i);
+       }
+    }
+  //use a loop to create word1, which is your original phrase without punctuation
+     
+     String word2 = "";
+     
+    for (int i = word1.length(); i > 0; i--) {
+       word2 = word2 + word1.charAt(i - 1);
+    }
+    
+   //word1 is now the original phrase without punctuation. 
+   //create word2, which is word1 backwards
+        
+     if(word2.equals(word1)) {
+      System.out.println(" is a palindrome");
+     }
+     
+      else {
+      System.out.println(" is not a palindrome");
+      }
+    }
+    }
+    
+}
