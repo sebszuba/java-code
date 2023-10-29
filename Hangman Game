@@ -1,0 +1,58 @@
+//hangman game, player has 10 lives to guess the word, after all lives are gone, they lose and word
+//is revealed, if they win, they win
+package h8;
+
+import java.util.Scanner;
+
+public class H8 {
+
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        
+        String word;
+        int lives = 10;
+        //get word from input
+        word = scnr.next();
+        //get the length of the word
+        int wordLength = word.length();
+        //replace the word with underscores
+        String word2 = "_".repeat(wordLength);
+        //loop for when teh player has lives
+        while (lives > 0) {
+        System.out.println(word2);
+        char letter = scnr.next().charAt(0);
+        //replace the underscores with the correcr letter guess
+        if (word.contains(letter + "")) {
+            System.out.println("Correct");
+            String temp = "";
+            
+            for(int i = 0; i < wordLength; i++) {
+            if (letter == word.charAt(i)) {
+                temp = temp + letter;
+            }
+            else {
+                temp = temp + word2.charAt(i);
+            }
+        }
+            
+            word2 = temp;
+            //win the game if all letters are guessed 
+            if (word2.equals(word.replaceAll(" ", "_"))) {
+                System.out.println("You win!");
+                System.out.println("Word: " + word);
+                break;
+            }
+        }
+        //lose a life after an incorrect guess
+        else {
+            System.out.println("Incorrect");
+            lives = lives - 1;
+            System.out.println("Remaining lives: " + lives);
+        }
+    }
+        //lose the game after all lives are used and reveal the word
+        if (lives == 0) {
+            System.out.println("You lose, the word was: " + word);
+        }
+    }
+}
